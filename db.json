@@ -1,0 +1,12 @@
+{
+    "posts": [
+
+        {
+            "id": 1,
+            "titulo": "abc", 
+            "imagem": "abs" ,
+            "crítica": "wed",
+            "nota": 6.7
+        }
+    ]
+}
