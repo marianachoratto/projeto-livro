@@ -2,10 +2,18 @@
 
 body{
     background-color: black;
+    background-image: url(imagens/netflix-logo_7btr.jpg);
+    background-size: cover ;
 }
 
 .navbar{
     background-color: black;
+    padding: 0;
+}
+
+.navbar-brand{
+    margin: 0px;
+    padding: 0px;
 }
 
 .btn{ color: black;
@@ -26,15 +34,11 @@ body{
     margin-right: auto; */
 }
 
-/* #search-bar{ 
-    
-} */
-
-
-
 #title{
     text-align: center;
     padding: 10px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.829);
 }
 
 #vote_average{

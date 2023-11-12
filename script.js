@@ -77,23 +77,17 @@ let genres = [
   },
 ];
 
-function buscar() {
+  function buscar() {
   let campoPesquisa = window.document.getElementById("search-bar");
   let valorCampoPesquisa = campoPesquisa.value;
-  console.log(valorCampoPesquisa);
-  let title = window.document.getElementById("title");
-  let vote_average = window.document.getElementById("vote_average");
-  let genre = window.document.getElementById("genre");
-  let release_date = window.document.getElementById("release_date");
-  let overview = window.document.getElementById("overview");
-  let imagemFilme = window.document.getElementById("imagem");
   let divRepetida = window.document.getElementById("divRepetida");
+  let body = window.document.getElementById('body')
 
   let filmesBuscados = [];
   let imagemURL = "https://image.tmdb.org/t/p/w500";
 
   divRepetida.innerHTML = ""
-
+  
   const options = {
     method: "GET",
     headers: {
@@ -110,31 +104,32 @@ function buscar() {
     .then((response) => response.json())
     .then((response) => {
       filmesBuscados = response.results;
+      if (filmesBuscados.length > 0){
+        body.style.backgroundImage = "url(imagens/fon-netflix-logo_1.jpg)"
+        body.style.backgroundSize = 'contain'
+      } 
       filmesBuscados.forEach((filme) => {
         //Configurando os gêneros
-        let generoInicial = filme.genre_ids; // retorna id: 12, 18
+        let generoInicial = filme.genre_ids; 
         let lista2 = generoInicial.map(function (i) {
-          // i= 12 && i= 18
           let oi = genres.filter(function (objeto) {
-            // na 2 volta o objeto vai ser {id: 12}
             return i == objeto.id;
           });
-          console.log(oi);
           return oi[0].name;
         });
+        
         // Criando novas DIVs
         let novaDiv = window.document.createElement("div");
         novaDiv.classList.add("card");
-        let dataInicial = filme.release_date.split("-"); //transforma string em array
+        let dataInicial = filme.release_date.split("-"); 
         let dataInvertida = `${dataInicial[2]}-${dataInicial[1]}-${dataInicial[0]}`;
-        //innerhtml passa tudo, tanto elemento quanto classe
         novaDiv.innerHTML = `\
         <div class="card-body d-flex gap-3">\
         <img src="${
           imagemURL + filme.poster_path
         }" class="card-img-start w-25" alt="${filme.title}" id="imagem"/>\
         <div id="texto">\
-          <h4 class="card-title" id="title">${filme.title}</h4>\
+          <h2 class="card-title" id="title">${filme.title}</h4>\
           <h5 class="card-subtitle mb-2 text-body-secondary" id="vote_average">Nota do Público:   ${filme.vote_average.toFixed(
             1
           )}</h5>\
@@ -144,41 +139,6 @@ function buscar() {
         </div>\
       </div> `;
         divRepetida.appendChild(novaDiv); //colocando no HTML
-        console.log(novaDiv);
       });
-
-      // //NOME DO FILME
-      // title.innerHTML = filmesBuscados.title;
-
-      // //VOTO
-      // //vote_average.innerHTML = filmesBuscados.vote_average.toFixed(1)
-
-      // //GENERO
-      // let generofetch = response;
-      // let generoInicial = filmesBuscados.genre_ids; // retorna id: 12, 18
-      // let lista2 = generoInicial.map(function (i) { // i= 12 && i= 18
-      //   let oi = genres.filter(function (objeto) {// na 2 volta o objeto vai ser {id: 12}
-      //     return i == objeto.id;
-      //   })
-      //   console.log(oi);
-      //   return oi[0].name
-      // });
-      // genre.innerHTML = `${lista2[0]}, ${lista2[1]}`;
-
-      // //RELEASE DATE
-      // let dataInicial = filmesBuscados.release_date.split("-"); //transforma string em array
-      // let dataInvertida = `${dataInicial[2]}-${dataInicial[1]}-${dataInicial[0]}`;
-      // release_date.innerHTML = dataInvertida;
-
-      // //RESUMO DO FILME
-      // overview.innerHTML = filmesBuscados.overview;
-
-      // //IMAGEM FILME
-      // imagemFilme.src = imagemURL + filmesBuscados.poster_path
-      // imagemFilme.alt = filmesBuscados.title
-
-      // console.log(imagemFilme.id);
     });
-
-  //.catch((err) => console.error(err));
 }
