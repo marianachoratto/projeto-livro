@@ -124,10 +124,10 @@ let genres = [
         let dataInicial = filme.release_date.split("-"); 
         let dataInvertida = `${dataInicial[2]}-${dataInicial[1]}-${dataInicial[0]}`;
         novaDiv.innerHTML = `\
-        <div class="card-body d-flex gap-3">\
+        <div class="card-body d-flex gap-3" id="card-body">\
         <img src="${
           imagemURL + filme.poster_path
-        }" class="card-img-start w-25" alt="${filme.title}" id="imagem"/>\
+        }" class="card-img-start w-25" alt="${filme.title}" id="imagemCard"/>\
         <div id="texto">\
           <h2 class="card-title" id="title">${filme.title}</h4>\
           <h5 class="card-subtitle mb-2 text-body-secondary" id="vote_average">Nota do Público:   ${filme.vote_average.toFixed(
